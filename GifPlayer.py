@@ -7,31 +7,26 @@ class GIFPlayer:
     def __init__(self, master, gif_path):
         self.master = master
         self.master.title("GIF Player")
-        icon_path = resource_path("icon.ico")
-        print(f"Icon path: {icon_path}")
-        if os.path.exists(icon_path):
-            self.master.iconbitmap(icon_path)
-        else:
-            print(f"Icon file not found: {icon_path}")
-
         self.master.attributes('-alpha', 0.0)
         self.master.overrideredirect(True)
+        self.master.attributes('-topmost', True)
         self.gif_path = gif_path
         self.frames = self.load_gif()
         self.label = tk.Label(master, bg='white')
         self.label.pack()
         self.index = 0
         self.play_gif()
-        self.master.attributes('-alpha', 1.0)
         self.master.geometry(f"{self.frames[0].width()}x{self.frames[0].height()}")
         self.master.wm_attributes('-transparentcolor', 'white')
-        screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
         window_width = self.frames[0].width()
         window_height = self.frames[0].height()
         self.master.geometry(f"{window_width}x{window_height}+0+{screen_height - window_height}")
         self.master.bind("<ButtonPress-1>", self.start_move)
         self.master.bind("<B1-Motion>", self.do_move)
+        self.master.bind("<KeyPress-F5>", self.fade_out)
+
+        self.fade_in()
 
     def load_gif(self):
         img = Image.open(self.gif_path)
@@ -73,16 +68,28 @@ class GIFPlayer:
             y = screen_height - window_height
         self.master.geometry(f"+{x}+{y}")
 
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
+    def fade_out(self, event=None):
+        self.fade(1.0)
 
+    def fade_in(self, alpha=0.0):
+        if alpha < 5.0:
+            self.master.attributes('-alpha', alpha)
+            self.master.after(50, self.fade_in, alpha + 0.05)
+
+    def fade(self, alpha):
+        if alpha > 0:
+            self.master.attributes('-alpha', alpha)
+            self.master.after(50, self.fade, alpha - 0.05)
+        else:
+            self.master.quit()
+
+def resource_path(relative_path):
+    base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
     return os.path.join(base_path, relative_path)
 
 if __name__ == "__main__":
     root = tk.Tk()
-    gif_path = resource_path("ExtrimeFine.gif")
+    gif_path = resource_path("eXtremeFine0.gif")
     player = GIFPlayer(root, gif_path)
+
     root.mainloop()
