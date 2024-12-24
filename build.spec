@@ -18,7 +18,7 @@ a = Analysis(
     ['GifPlayer.py'],
     pathex=[],
     binaries=[],
-    datas=[('ExtrimeFine.gif', '.')],
+    datas=[('res', '.')],
     hiddenimports=[],
     hookspath=[],
     runtime_hooks=[],
@@ -48,9 +48,9 @@ version = VSVersionInfo(
                 u'040904B0',
                 [
                     StringStruct(u'CompanyName', u'Danil`s Vey`s Overlay`s'),
-                    StringStruct(u'FileDescription', u'This is programm add on yours Desktop ExtrimFine'),
+                    StringStruct(u'FileDescription', u'This is programm add on yours Desktop eXtremeFine0'),
                     StringStruct(u'FileVersion', u'1.0.0.0'),
-                    StringStruct(u'InternalName', u'Desktop ExtrimFin'),
+                    StringStruct(u'InternalName', u'Desktop eXtremeFine0'),
                     StringStruct(u'LegalCopyright', u''),
                     StringStruct(u'OriginalFilename', u'Game.exe'),
                     StringStruct(u'ProductName', u'Game'),
@@ -69,14 +69,14 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='Desktop ExtrimeFine',
+    name='Desktop eXtremeFine0',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
     console=False,
     version=version,
-	icon='icon.ico'
+	icon='res/win_ico/icon.ico'
 )
 
 coll = COLLECT(
@@ -87,6 +87,6 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='Desktop ExtrimeFine',
+    name='Desktop eXtremeFine0',
     outdir='build\libs'
 )
