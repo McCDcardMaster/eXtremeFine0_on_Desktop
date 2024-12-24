@@ -18,7 +18,7 @@ a = Analysis(
     ['GifPlayer.py'],
     pathex=[],
     binaries=[],
-    datas=[('eXtremeFine0.gif', '.')],
+    datas=[('res', '.')],
     hiddenimports=[],
     hookspath=[],
     runtime_hooks=[],
@@ -76,7 +76,7 @@ exe = EXE(
     upx=True,
     console=False,
     version=version,
-	icon='icon.ico'
+	icon='res/win_ico/icon.ico'
 )
 
 coll = COLLECT(
