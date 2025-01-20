@@ -54,7 +54,7 @@ class GIFPlayer:
             frame = self.frames[self.index]
             self.label.config(image=frame)
             self.index = (self.index + 1) % len(self.frames)
-            self.master.after(11, self.play_gif) # change the speed dflt is: 11
+            self.master.after(14, self.play_gif) # change the speed dflt is: 11
             
     #   This is enable moveing mode
     def start_move(self, event):
